@@ -12,8 +12,7 @@ function Person() {
   function handleLastNameChange(e) {
     setPerson({...person, lastName: e.target.value});
   };
-
-
+  
   const handleIncreaseAge = () => {
     setPerson({ ...person, age: person.age + 1 });
   };
@@ -31,8 +30,8 @@ function Person() {
       onChange={handleLastNameChange}
       value={person.lastName}/>
 
-      <div>{person.name}</div>
-      <div>{person.age}</div>
+      <h1>{person.name}</h1>
+      <h2>{person.age}</h2>
 
       <Button
       label="Age"

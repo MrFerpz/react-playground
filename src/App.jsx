@@ -1,35 +1,67 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+function Person() {
+  const [person, setPerson] = useState({ firstName: "John", lastName: "Smith", age: 100 });
+  person.name = person.firstName + " " + person.lastName;
+
+  function handleFirstNameChange(e) {
+    setPerson({...person, firstName: e.target.value});
+  };
+
+  function handleLastNameChange(e) {
+    setPerson({...person, lastName: e.target.value});
+  };
+
+
+  const handleIncreaseAge = () => {
+    setPerson({ ...person, age: person.age + 1 });
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <Input 
+      label="First Name"
+      onChange={handleFirstNameChange}
+      value={person.firstName}/>
+
+      <Input 
+      label="Last Name"
+      onChange={handleLastNameChange}
+      value={person.lastName}/>
+
+      <div>{person.name}</div>
+      <div>{person.age}</div>
+
+      <Button
+      label="Age"
+      onClick={handleIncreaseAge}
+      />
     </>
+  );
+}
+
+function Input({label, value, onChange}) {
+  return (
+    <div>
+      <label>
+        {label}
+        {' '}
+      <input
+      value={value}
+      onChange={onChange}
+      />
+      </label>
+    </div>
   )
 }
 
-export default App
+function Button({onClick}) {
+  return (
+  <button 
+  onClick={onClick}>Increase Age
+  </button>
+  )}
+
+export default Person
